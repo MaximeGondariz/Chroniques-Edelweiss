@@ -1,0 +1,27 @@
+<div class="main-container">
+    <div class="record-name">
+        <div *ngFor="let jdr of recordTable; let index = index">
+            <a (click)="getRecordIndex(index)" *ngIf="recordShown !== index">{{jdr.name}}</a>
+            <a (click)="getRecordIndex(index)" class="shown" *ngIf="recordShown === index">{{jdr.name}}</a>
+        </div>
+    </div>
+
+    <ng-container *ngIf="recordShown !== undefined">
+        <div class="record-container">
+            <div class="record-card" *ngFor="let record of recordTable[recordShown].record">
+                <div class="record-card-title">
+                    {{record.title}}
+                </div>
+                <div class="record-card-winners">
+                    <p *ngFor="let player of record.players">{{player.pseudo}}</p>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="recordShown === undefined">
+        <div class="record-not-found">
+            NO RECORD SELECTED
+        </div>
+    </ng-container>
+</div>

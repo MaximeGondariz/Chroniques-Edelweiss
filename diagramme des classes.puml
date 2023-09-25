@@ -1,0 +1,60 @@
+@startuml
+
+class compte{
+    -id: int
+    -pseudo: string
+    -email: string
+    -password: string
+}
+
+class jdr{
+    -id: int
+    -nom: string
+    -description: string
+    -img: file
+    -candidature: boolean
+    -date_prochaine_seance: date
+}
+
+class notification{
+    -id: int
+    -titre: string
+    -message: string
+    -restriction: int
+}
+
+class visiteur{
+}
+
+class joueur{
+    -flowers: int
+}
+
+class mj{
+    -flowers: int
+
+}
+
+class admin{
+    -flowers: int
+}
+
+class tags{
+    id: int
+    nom: string
+}
+
+compte <|-- visiteur
+compte <|-- admin
+compte <|-- joueur
+compte <|-- mj
+
+joueur "1..*" --  "0..*" jdr
+mj "1" --  "0..*" jdr
+
+mj "1" -- "0..*" notification
+admin "1" -- "0..*" notification
+
+jdr "0..*" -- "0..*" tags
+
+@enduml

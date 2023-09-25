@@ -1,0 +1,113 @@
+.body-page{
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    font-family: quicksand;
+}
+
+footer{
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: var(--black);
+    color: white;
+}
+
+nav{
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: var(--black);
+    color: var(--white);
+}
+
+
+
+.img-links{
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.links-menu{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.links-menu>a{
+    text-decoration: none;
+    color: var(--white);
+    cursor: pointer;
+    margin: 10px;
+}
+
+.nav-img{
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+}
+
+.account-login{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--white);
+    color: var(--black);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.badge-account{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.badge-account>h3{
+    margin: 0;
+}
+
+.badge-account>p{
+    margin: 0;
+}
+
+.nav-button{
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: var(--yellow);
+    font-family: quicksand;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.signin-button{
+    margin-right: 10px;
+}
+
+.login-container{
+    margin-right: 20px;
+}
+
+.router{
+    height: 100%;
+}

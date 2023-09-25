@@ -1,0 +1,46 @@
+<div class="body-page">
+  <nav>
+    <div class="img-links">
+      <div>
+        <img class="nav-img" routerLink="" routerLinkActive="active" src="./assets/img/logo_secondaire_edelweiss.png">
+      </div>
+    
+      <div class="links-menu">
+        <a routerLink="/jdr" routerLinkActive="active">JDR</a>
+        <a routerLink="/records" routerLinkActive="active">Records</a>
+        <a routerLink="/archives" routerLinkActive="active">Archives</a>
+      </div>
+    </div>
+  
+    <div *ngIf="!loginStatus">
+      <div class="login-container">
+        <button class="nav-button signin-button" routerLink="/signin" routerLinkActive="active">
+          S'inscrire
+        </button>
+        <button class="nav-button" (click)="changeLoginStatus()">
+          Se connecter
+        </button>
+      </div>
+    </div>
+
+    <div class="login-container" *ngIf="loginStatus">
+      <app-log-in [loginStatus]="loginStatus" (loginEmitter)="receiveEmitStatus($event)"></app-log-in>
+    </div>
+  </nav>
+  <div class="router">
+    <router-outlet></router-outlet>
+  </div>
+  <footer>
+    <div>
+      Équipe du site
+    </div>
+  
+    <div>
+      Condition légal
+    </div>
+
+    <div>
+      Réseaux Sociaux
+    </div>
+  </footer>
+</div>

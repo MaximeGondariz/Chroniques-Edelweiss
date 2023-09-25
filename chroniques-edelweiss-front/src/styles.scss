@@ -1,0 +1,23 @@
+:root {
+    --white: #ffffff;
+    --black: #000000;
+    --cyan: #9BEEF0;
+    --yellow: #F8E197;
+    --dark-cyan: #3aacae;
+    --dark-yellow: #ab923f;
+}
+
+@font-face {
+    font-family: quicksand;
+    src: url("./assets/font/Quicksand_Book.otf") format("truetype");
+}
+
+body{
+    margin: 0px;
+    padding: 0px;
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    font-family: quicksand;
+}
