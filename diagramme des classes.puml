@@ -23,9 +23,6 @@ class notification{
     -restriction: int
 }
 
-class visiteur{
-}
-
 class joueur{
     -flowers: int
 }

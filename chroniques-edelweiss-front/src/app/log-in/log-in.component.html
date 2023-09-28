@@ -1,11 +1,11 @@
-<form class="login-form">
+<form class="login-form" (ngSubmit)="logIn(formSearch)" #formSearch="ngForm">
     <div class="form-container">
         <div class="form-div-input">
             <label>
                 Email
             </label>
     
-            <input placeholder="yourEmail@gmail.com">
+            <input type="email" placeholder="yourEmail@gmail.com" ngModel required name="email" id="email">
         </div>
 
         <div class="form-div-input">
@@ -13,13 +13,13 @@
                 Mot de passe
             </label>
     
-            <input type="password">
+            <input type="password" ngModel required name="password" id="password">
         </div>
-
+        <div class="wrong" *ngIf="isWrong">L'email ou le mot de passe est incorrecte</div>
         
         <div class="form-div-button">
-            <button class="form-button login">LOGIN</button>
-            <button class="form-button close" (click)="quitLoginElement()">CLOSE</button>
+            <button type="submit" class="form-button login">LOGIN</button>
+            <button type="button" class="form-button close" (click)="quitLoginElement()">CLOSE</button>
         </div>
     </div>
 </form>

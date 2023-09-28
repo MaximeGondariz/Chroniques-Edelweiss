@@ -1,10 +1,15 @@
 <div class="body-page">
+  <app-side-menu (sideMenuEmitter)="receiveSideMenuStatus($event)" class="side-menu-container" *ngIf="isSideMenu"></app-side-menu>
   <nav>
     <div class="img-links">
       <div>
         <img class="nav-img" routerLink="" routerLinkActive="active" src="./assets/img/logo_secondaire_edelweiss.png">
       </div>
     
+      <div class="side-menu-burger" (click)="changeSideMenuStatus()">
+        insert burger here
+      </div>
+
       <div class="links-menu">
         <a routerLink="/jdr" routerLinkActive="active">JDR</a>
         <a routerLink="/records" routerLinkActive="active">Records</a>
@@ -12,34 +17,42 @@
       </div>
     </div>
   
-    <div *ngIf="!loginStatus">
-      <div class="login-container">
-        <button class="nav-button signin-button" routerLink="/signin" routerLinkActive="active">
-          S'inscrire
-        </button>
-        <button class="nav-button" (click)="changeLoginStatus()">
-          Se connecter
-        </button>
-      </div>
+
+    <div class="login-container" *ngIf="!loginStatus && !connectedUser">
+      <button class="nav-button signin-button" routerLink="/signin" routerLinkActive="active">
+        S'inscrire
+      </button>
+      <button class="nav-button" (click)="changeLoginStatus()">
+        Se connecter
+      </button>
     </div>
 
-    <div class="login-container" *ngIf="loginStatus">
-      <app-log-in [loginStatus]="loginStatus" (loginEmitter)="receiveEmitStatus($event)"></app-log-in>
+    <div class="login-container" *ngIf="loginStatus && !connectedUser">
+      <app-log-in [loginStatus]="loginStatus" (loginEmitter)="receiveLoginStatus($event)" (checkEmitter)="receiveCheckAuth()"></app-log-in>
+    </div>
+
+    <div class="logged-container" *ngIf="connectedUser">
+      <div class="logged-info">
+        <div class="pseudo">
+          {{connectedUser.pseudo}}
+        </div>
+        <div>
+          {{connectedUser.flowers}} Fleurs
+        </div>
+      </div>
+      <button class="nav-button" (click)="logOut()">Deconnexion</button>
     </div>
   </nav>
   <div class="router">
     <router-outlet></router-outlet>
   </div>
   <footer>
-    <div>
-      Équipe du site
-    </div>
   
-    <div>
+    <div class="footer-links">
       Condition légal
     </div>
 
-    <div>
+    <div class="footer-links">
       Réseaux Sociaux
     </div>
   </footer>

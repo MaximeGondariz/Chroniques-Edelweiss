@@ -1,4 +1,4 @@
-<form class="login-form">
+<form class="login-form" (ngSubmit)="signIn(formSearch)" #formSearch="ngForm">
     <div class="form-container">
         <label class="title">
             Création d'un compte
@@ -10,7 +10,7 @@
                     Pseudo
                 </label>
         
-                <input id="pseudo">
+                <input ngModel required name="pseudo" id="pseudo">
             </div>
         </div>
 
@@ -20,7 +20,8 @@
                     Email
                 </label>
         
-                <input id="email">
+                <input ngModel required name="email" id="email" type="email">
+                <div class="error" *ngIf="emailExist">Cette adresse mail est déjà utilisé</div>
             </div>
     
             <div class="form-div-input">
@@ -28,7 +29,7 @@
                     Confirmer Email
                 </label>
         
-                <input id="confirm-email">
+                <input ngModel required name="confirmEmail" id="confirmEmail" type="email">
             </div>
         </div>
 
@@ -37,8 +38,52 @@
                 <label for="password">
                     Mot de passe
                 </label>
-        
-                <input id="password" type="password">
+                <input [(ngModel)]="password" required name="password" id="password" type="password">
+
+                <div class="details">
+                    Attention, le mot de passe doit répondre à ses caractéristique :
+                    <ul>
+                        <li *ngIf="!password">
+                            au moins 8 caractères
+                        </li>
+                        <li class="confirmed" *ngIf="passwordLengthRegExp.test(password)">
+                            au moins 8 caractères
+                        </li>
+                        <li class="error" *ngIf="password && !passwordLengthRegExp.test(password)">
+                            au moins 8 caractères
+                        </li>
+
+                        <li *ngIf="!password">
+                            au moins un chiffre
+                        </li>
+                        <li class="confirmed" *ngIf="password && passwordNumberRegExp.test(password)">
+                            au moins un chiffre
+                        </li>
+                        <li class="error" *ngIf="password && !passwordNumberRegExp.test(password)">
+                            au moins un chiffre
+                        </li>
+
+                        <li *ngIf="!password">
+                            au moins un caractère spécial
+                        </li>
+                        <li class="confirmed" *ngIf="password && passwordSpecialRegExp.test(password)">
+                            au moins un caractère spécial
+                        </li>
+                        <li class="error" *ngIf="password && !passwordSpecialRegExp.test(password)">
+                            au moins un caractère spécial
+                        </li>
+
+                        <li *ngIf="!password">
+                            au moins une majuscule et une minuscule
+                        </li>
+                        <li class="confirmed" *ngIf="password && (passwordLowerRegExp.test(password) && passwordUpperRegExp.test(password))">
+                            au moins une majuscule et une minuscule
+                        </li>
+                        <li class="error" *ngIf="password && (!passwordLowerRegExp.test(password) || !passwordUpperRegExp.test(password))">
+                            au moins une majuscule et une minuscule
+                        </li>
+                    </ul>
+                </div>
             </div>
     
             <div class="form-div-input">
@@ -46,12 +91,12 @@
                     Confirmer Mot de passe
                 </label>
         
-                <input id="confirm-password" type="password">
+                <input ngModel required name="confirmPassword" id="confirmPassword" type="password">
             </div>
         </div>
         
         <div class="form-div-button">
-            <button class="form-button login">SIGN IN</button>
+            <button type="submit" class="form-button login">SIGN IN</button>
         </div>
     </div>
 </form>

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { JdrPaginationComponent } from './jdr-pagination/jdr-pagination.component';
-import { TeamComponent } from './team/team.component';
 import { RecordComponent } from './record/record.component';
 import { CookiePopUpComponent } from './cookie-pop-up/cookie-pop-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -12,6 +12,8 @@ import { LogInComponent } from './log-in/log-in.component';
 import { LegalTermsComponent } from './legal-terms/legal-terms.component';
 import { ArchivesComponent } from './archives/archives.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { SideMenuComponent } from './side-menu/side-menu.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -39,10 +41,6 @@ const routes: Routes = [
     component: ArchivesComponent
   },
   {
-    path: 'team',
-    component: TeamComponent
-  },
-  {
     path: 'legalterms',
     component: LegalTermsComponent
   }
@@ -51,18 +49,21 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     JdrPaginationComponent,
-    TeamComponent,
     RecordComponent,
     CookiePopUpComponent,
     SignInComponent,
     LogInComponent,
     LegalTermsComponent,
     ArchivesComponent,
-    MainPageComponent
+    MainPageComponent,
+    SideMenuComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   exports: [RouterModule],
@@ -70,4 +71,5 @@ const routes: Routes = [
     AppComponent,
   ]
 })
-export class AppModule { }
+export class AppModule {
+}
