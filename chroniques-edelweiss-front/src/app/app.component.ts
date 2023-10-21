@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from './service/auth.service';
 import { User } from 'src/assets/interfaces/interfaces';
 import { Subscription } from 'rxjs';
@@ -44,15 +44,18 @@ export class AppComponent implements OnInit {
     this.loginStatus = status;
   }
 
-  receiveSideMenuStatus(status: boolean) {
-    this.isSideMenu = status;
-  }
-
   receiveCheckAuth() {
     this.subscriptions.push(
       this.authService
         .checkAuth()
         .subscribe((value) => (this.connectedUser = value))
     );
+  }
+
+  @HostListener('window:resize', ['$event'])
+  checkScreenWidth(){
+    if(window.innerWidth > 650){
+      this.isSideMenu = false;
+    }
   }
 }

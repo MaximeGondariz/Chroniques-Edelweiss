@@ -1,27 +1,8 @@
 <div class="main-container">
     <ng-container *ngFor="let jdr of jdrTable; let index = index">
-        <div class="jdr-container" *ngIf="(index%2) === 0">
-            <div class="jdr-info">
-                <div class="jdr-title">
-                    {{jdr.name}}
-                </div>
-                <div class="jdr-description">
-                    {{jdr.description}}
-                </div>
-                <div class="jdr-buttons">
-                    <button>PLANNING</button>
-                    <button>CANDIDATURE</button>
-                </div>
-            </div>
-            <div>
-                <img class="jdr-img" src="../../assets/img/logo_principale_edelweiss.png">
-            </div>
-        </div>
+        <div class="jdr-container">
+            <img class="jdr-img" src="../../assets/img/logo_principale_edelweiss.png">
 
-        <div class="jdr-container" *ngIf="(index % 2) !== 0">
-            <div>
-                <img class="jdr-img" src="../../assets/img/logo_principale_edelweiss.png">
-            </div>
             <div class="jdr-info">
                 <div class="jdr-title">
                     {{jdr.name}}
@@ -31,7 +12,7 @@
                 </div>
                 <div class="jdr-buttons">
                     <button>PLANNING</button>
-                    <button>CANDIDATURE</button>
+                    <!-- <button>CANDIDATURE</button> -->
                 </div>
             </div>
         </div>

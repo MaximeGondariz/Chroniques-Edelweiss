@@ -1,5 +1,38 @@
 <div class="body-page">
-  <app-side-menu (sideMenuEmitter)="receiveSideMenuStatus($event)" class="side-menu-container" *ngIf="isSideMenu"></app-side-menu>
+  <!-- Side menu -->
+  <div class="side-menu-container" *ngIf="isSideMenu">
+    <button class="close-button" (click)="changeSideMenuStatus()">X</button>
+    <button class="nav-button signin-button" routerLink="/signin" routerLinkActive="active" *ngIf="!loginStatus && !connectedUser">
+      S'inscrire
+    </button>
+    <button class="nav-button" (click)="changeLoginStatus()" *ngIf="!loginStatus && !connectedUser">
+      Se connecter
+    </button>
+
+    <div class="side-login-container" *ngIf="loginStatus && !connectedUser">
+      <app-log-in [loginStatus]="loginStatus" [isSideMenu]="isSideMenu" (loginEmitter)="receiveLoginStatus($event)" (checkEmitter)="receiveCheckAuth()"></app-log-in>
+    </div>
+
+    <div class="logged-side-container" *ngIf="connectedUser">
+      <div class="logged-info">
+        <div class="pseudo">
+          {{connectedUser.pseudo}}
+        </div>
+        <div>
+          {{connectedUser.flowers}} Fleurs
+        </div>
+      </div>
+      <button class="nav-button" (click)="logOut()">Deconnexion</button>
+    </div>
+
+    <a routerLink="/jdr" routerLinkActive="active">JDR</a>
+
+    <a routerLink="/records" routerLinkActive="active">Records</a>
+
+    <a routerLink="/archives" routerLinkActive="active">Archives</a>
+  </div>
+
+  <!-- Navbar -->
   <nav>
     <div class="img-links">
       <div>
@@ -28,7 +61,7 @@
     </div>
 
     <div class="login-container" *ngIf="loginStatus && !connectedUser">
-      <app-log-in [loginStatus]="loginStatus" (loginEmitter)="receiveLoginStatus($event)" (checkEmitter)="receiveCheckAuth()"></app-log-in>
+      <app-log-in [loginStatus]="loginStatus" [isSideMenu]="isSideMenu" (loginEmitter)="receiveLoginStatus($event)" (checkEmitter)="receiveCheckAuth()"></app-log-in>
     </div>
 
     <div class="logged-container" *ngIf="connectedUser">
@@ -43,9 +76,13 @@
       <button class="nav-button" (click)="logOut()">Deconnexion</button>
     </div>
   </nav>
+
+  <!-- Content -->
   <div class="router">
     <router-outlet></router-outlet>
   </div>
+
+  <!-- Footer -->
   <footer>
   
     <div class="footer-links">

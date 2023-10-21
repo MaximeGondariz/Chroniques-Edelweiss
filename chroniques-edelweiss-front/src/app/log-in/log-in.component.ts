@@ -9,7 +9,8 @@ import { AuthService } from '../service/auth.service';
 })
 export class LogInComponent {
 
-  @Input() loginStatus: boolean | undefined
+  @Input() loginStatus: boolean | undefined;
+  @Input() isSideMenu: boolean | undefined;
 
   @Output() loginEmitter = new EventEmitter<boolean>();
   @Output() checkEmitter = new EventEmitter();

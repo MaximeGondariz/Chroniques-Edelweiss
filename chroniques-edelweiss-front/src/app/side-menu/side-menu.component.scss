@@ -1,21 +1,8 @@
 .side-menu-body{
-    padding: 10px;
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    
 }
 
-.close-button{
-    font-size: 26px;
-    position: absolute;
-    border: none;
-    color: white;
-    background-color: rgba(0,0,0,0);
-    top: 2rem;
-    right: 1rem;
-}
+
 
 .nav-button{
     border: none;
@@ -30,12 +17,4 @@
 
 .last-button{
     margin-bottom: 20px;
-}
-
-a{
-    text-decoration: none;
-    color: var(--white);
-    cursor: pointer;
-    margin: 10px;
-    font-size: 20px
 }
