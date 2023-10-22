@@ -42,11 +42,11 @@ async function init() {
   app.use(express.urlencoded({extended: true}))
   app.use(cors())
 
-  // On interroge la base de données et on récupère tous les documents liés à la collection cats
-  // ==========================
-  app.get("/", async (req, res) => {
+  //
+  // Commande JDR
+  //==========================
+  app.get("/jdrs", async (req, res) => {
     try {
-        // la méthode .find() du Modèle permet de récupérer les documents
         const docs = await JdrModel.find({});
         res.json(docs);
     } catch (err) {
@@ -54,9 +54,13 @@ async function init() {
     }
   });
 
+
+
+  //
+  // Commande users
+  //==========================
   app.get("/users", async (req, res) => {
     try {
-        // la méthode .find() du Modèle permet de récupérer les documents
         const docs = await UserModel.find({});
         res.json(docs);
     } catch (err) {
@@ -64,7 +68,7 @@ async function init() {
     }
   });
 
-  // Création d'un nouveau document
+  // Création d'un nouveau utilisateur
   // ==========================
   app.post("/users/signin", async (req, res) => {
     try {

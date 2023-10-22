@@ -6,16 +6,17 @@
 }
 
 .jdr-container{
-    width: 50%;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
     min-height: 500px;  
 }
 
 .jdr-img{
-    width: 400px;
+    min-width: 200px;
+    max-width: 400px;
     height: auto;
 }
 
@@ -55,8 +56,8 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 800px) {
     .jdr-container{
-        width: 100%;
+        flex-wrap: wrap;
     }
 }

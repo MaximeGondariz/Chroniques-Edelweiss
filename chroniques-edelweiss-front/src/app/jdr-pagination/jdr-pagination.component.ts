@@ -1,23 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { JdrService } from '../service/jdr.service';
+import { JDR } from 'src/assets/interfaces/interfaces';
 
 @Component({
   selector: 'app-jdr-pagination',
   templateUrl: './jdr-pagination.component.html',
-  styleUrls: ['./jdr-pagination.component.scss']
+  styleUrls: ['./jdr-pagination.component.scss'],
 })
-export class JdrPaginationComponent {
-  jdrTable: Array<{name: string, description: string}> = [
-    {
-      name: 'Primevère',
-      description: 'LOREM IPSUM :=)'
-    },
-    {
-      name: 'Donjon Explorer',
-      description: 'LOREM IPSUM :=)'
-    },
-    {
-      name: 'Pokemon',
-      description: 'LOREM IPSUM :=)'
-    },
-  ]
+export class JdrPaginationComponent implements OnInit {
+  jdrTable: JDR[] = [];
+
+  constructor(private jdrService: JdrService) {}
+
+  ngOnInit(): void {
+    this.jdrService.getJdrs().subscribe((value) => {
+      console.log(value);
+      this.jdrTable = value;
+    });
+  }
 }
