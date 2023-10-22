@@ -11,8 +11,6 @@ class jdr{
     -id: int
     -nom: string
     -description: string
-    -img: file
-    -candidature: boolean
     -date_prochaine_seance: date
 }
 
@@ -36,11 +34,6 @@ class admin{
     -flowers: int
 }
 
-class tags{
-    id: int
-    nom: string
-}
-
 compte <|-- visiteur
 compte <|-- admin
 compte <|-- joueur
@@ -51,7 +44,5 @@ mj "1" --  "0..*" jdr
 
 mj "1" -- "0..*" notification
 admin "1" -- "0..*" notification
-
-jdr "0..*" -- "0..*" tags
 
 @enduml
