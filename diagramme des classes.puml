@@ -21,6 +21,17 @@ class notification{
     -restriction: int
 }
 
+class records{
+    -name: string
+    -record: record[]
+}
+
+interface record{
+    -title: string
+    -players: string[]
+    -highscore: string
+}
+
 class joueur{
     -flowers: int
 }
@@ -43,5 +54,8 @@ mj "1" --  "0..*" jdr
 
 mj "1" -- "0..*" notification
 admin "1" -- "0..*" notification
+
+mj "1..*" -- "0..*" record
+admin "1..*" -- "0..*" record
 
 @enduml
