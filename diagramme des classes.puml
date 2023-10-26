@@ -34,7 +34,6 @@ class admin{
     -flowers: int
 }
 
-compte <|-- visiteur
 compte <|-- admin
 compte <|-- joueur
 compte <|-- mj

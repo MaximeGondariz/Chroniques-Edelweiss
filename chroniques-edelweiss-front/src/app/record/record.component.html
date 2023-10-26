@@ -13,7 +13,10 @@
                     {{record.title}}
                 </div>
                 <div class="record-card-winners">
-                    <p *ngFor="let player of record.players">{{player.pseudo}}</p>
+                    <p *ngFor="let player of record.players">{{player}}</p>
+                </div>
+                <div class="record-card-highscore">
+                    <p>{{record.highscore}}</p>
                 </div>
             </div>
         </div>
