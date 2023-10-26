@@ -30,9 +30,19 @@ async function init() {
     date_prochaine_seance: Date
   })
 
+  const RecordSchema = new mongoose.Schema({
+    name: String,
+    record: [{
+      title: String,
+      players: [String],
+      highscore: String
+    }]
+  })
+
   // Création d'un objet Modèle basé sur le schéma
-  const UserModel = mongoose.model("users", UserSchema)
-  const JdrModel = mongoose.model("jdr", JdrSchema)
+  const UserModel = mongoose.model("users", UserSchema);
+  const JdrModel = mongoose.model("jdr", JdrSchema);
+  const RecordModel = mongoose.model("records", RecordSchema);
 
   var connectedUser = undefined
   // Initialisation de l'app Express
@@ -245,8 +255,52 @@ async function init() {
     }
   })
 
+  //
+  // Commande records
+  //==========================
+  // Récupère tous les records
+  //
+  app.get("/records", async (req, res) => {
+    try {
+        const records = await RecordModel.find({});
+        res.json(records);
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+  });
+
+
+  //
+  //==========================
   // Démarrage de l'app Express
+  //
   app.listen(8000, () =>
     console.log(`Server running at http://localhost:8000/`)
   );
 }
+
+/*
+  {
+    name: 'Primevère',
+    record: [{
+      title: 'Nombre de mort lors de la première séance d\'un personnage',
+      players: ['Windfast'],
+      highscore: '2 morts'
+    },
+    {
+      title: 'Durée de survie la plus courte',
+      players: ['Windfast'],
+      highscore: '2 heures'
+    },
+    {
+      title: 'Nombre de mort d\'un même personnage',
+      players: ['Noenra'],
+      highscore: '2 morts'
+    },
+    {
+      title: 'Fuite avec la plus grande durée',
+      players: ['SMPK10', 'William Alpha'],
+      highscore: '16 jours'
+    }]
+  }
+*/

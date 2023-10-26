@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
     this.subscriptions.push(
       this.authService.checkAuth().subscribe((value) => {
         this.connectedUser = value;
-        console.log(this.connectedUser);
       })
     );
   }

@@ -27,3 +27,13 @@ export interface JDR {
     description: string,
     date_prochaine_seance?: Date
 }
+
+
+export interface Records{
+    name: string,
+    record: Array<{
+        title: string,
+        players: string[],
+        highscore: string
+    }>
+}
