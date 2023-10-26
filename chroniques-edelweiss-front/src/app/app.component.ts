@@ -45,11 +45,7 @@ export class AppComponent implements OnInit {
   }
 
   receiveCheckAuth() {
-    this.subscriptions.push(
-      this.authService
-        .checkAuth()
-        .subscribe((value) => (this.connectedUser = value))
-    );
+    window.location.reload();
   }
 
   @HostListener('window:resize', ['$event'])

@@ -1,0 +1,114 @@
+.admin-menu{
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.side-link-menu{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    overflow: auto;
+    border: 2px solid black
+}
+
+.link-menu{
+    width: 100%;
+    min-height: 40px;
+    font-size: 26px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.link-border{
+    border-right : 2px solid black;
+}
+
+.users-pag, .jdr-pag{
+    width: 90%;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.users-table{
+    width: 100%;
+    padding: 0;
+    border-collapse: collapse;
+}
+
+thead, tbody{
+    width: 100%;
+}
+
+tbody>tr:nth-child(odd){
+    background-color: var(--cyan);
+}
+
+td{
+    width: 25%;
+    text-align: center;
+}
+
+.flowers{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.flowers-icons{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}
+
+.flowers-input{
+    width: 30%;
+}
+
+.suppr{
+    background-color: rgb(251, 160, 160);
+    padding: 15px;
+}
+
+.no-display{
+    display: none;
+}
+
+.yes-or-no{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.yes{
+    color: green
+}
+
+.no{
+    color: red
+}
+
+.no-access{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    font-weight: 700;
+    color: red
+}

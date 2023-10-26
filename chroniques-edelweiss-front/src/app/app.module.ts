@@ -14,6 +14,7 @@ import { ArchivesComponent } from './archives/archives.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdministrationComponent } from './administration/administration.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: 'legalterms',
     component: LegalTermsComponent
+  },
+  {
+    path: 'administration',
+    component: AdministrationComponent
   }
 ];
 @NgModule({
@@ -56,7 +61,8 @@ const routes: Routes = [
     LegalTermsComponent,
     ArchivesComponent,
     MainPageComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    AdministrationComponent
   ],
   imports: [
     BrowserModule,

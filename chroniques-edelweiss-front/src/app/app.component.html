@@ -42,6 +42,8 @@
     <a routerLink="/records" routerLinkActive="active">Records</a>
 
     <a routerLink="/archives" routerLinkActive="active">Archives</a>
+
+    <a routerLink="/administration" *ngIf="connectedUser && connectedUser.status === 'admin'">Administration</a>
   </div>
 
   <!-- Navbar -->
@@ -89,6 +91,7 @@
         <a routerLink="/jdr" routerLinkActive="active">JDR</a>
         <a routerLink="/records" routerLinkActive="active">Records</a>
         <a routerLink="/archives" routerLinkActive="active">Archives</a>
+        <a routerLink="/administration" *ngIf="connectedUser && connectedUser.status === 'admin'">Administration</a>
       </div>
     </div>
 

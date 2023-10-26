@@ -54,22 +54,22 @@ async function init() {
     }
   });
 
-
-
   //
   // Commande users
   //==========================
+  // Récupère tous les utilisateurs
+  //
   app.get("/users", async (req, res) => {
     try {
-        const docs = await UserModel.find({});
-        res.json(docs);
+        const users = await UserModel.find({});
+        res.json(users);
     } catch (err) {
         res.status(500).send(err.message);
     }
   });
 
   // Création d'un nouveau utilisateur
-  // ==========================
+  //
   app.post("/users/signin", async (req, res) => {
     try {
         var data = req.body;
@@ -79,7 +79,7 @@ async function init() {
             pseudo: data.pseudo,
             email: data.email,
             password: data.password,
-            status: 'player',
+            status: data.status,
             flowers: 0
         })
         newUser.save();
@@ -89,39 +89,37 @@ async function init() {
     }
   });
 
+  // Vérifie si l'email est déjà utilisé
+  //
   app.post('/users/checkSignin', async (req, res) => {
     var data = req.body;
     const Users = await UserModel.find({});
-    let connection = false;
+    let alreadyInUse = false;
 
     Users.forEach(user => {
-      if(user.email == data.email){
-        connection = true
+      if(user.email === data.email){
+        alreadyInUse = true;
       }
     })
-    
-    res.send(JSON.stringify(connection))
+    res.send(JSON.stringify(alreadyInUse))
   })
 
+  // Vérifie les identifiants envoyé est connecte l'utilisateur si les identifiants sont bons
+  // 
   app.post('/users/login', async (req, res) => {
     try{
       var data = req.body;
-      const Users = await UserModel.find({});
+      const filter = {
+        email: data.email,
+        password: data.password
+      }
+      const user = await UserModel.findOne(filter);
       let connection = false;
 
-      Users.forEach(user => {
-      if(user.email == data.email && user.password == data.password){
+      if(user){
         connection = true
-        connectedUser = {
-          id: user.id,
-          pseudo: user.pseudo,
-          email: user.email,
-          password: user.password,
-          status: user.status,
-          flowers: user.flowers
-        }
+        connectedUser = user
       }
-      })
     
       res.send(JSON.stringify(connection))
     }catch (err) {
@@ -129,6 +127,8 @@ async function init() {
     }
   })
 
+  // Vérifie si un utilisateur est connécter
+  //
   app.get('/users/checklogin', async (req, res) =>{
     if(connectedUser != undefined){
       res.send(connectedUser)
@@ -137,9 +137,73 @@ async function init() {
     }
   })
 
+  // Déconnecte l'utilisateur
+  //
   app.get('/users/logout', async (req, res) => {
     connectedUser = undefined
     res.send(JSON.stringify(false))
+  })
+
+  // Change le status de l'utilisateurs
+  //
+  app.put('/users/status', async (req, res) => {
+    try{
+      var data = req.body;
+      const filter = {
+        email: data.email,
+        password: data.password
+      }
+
+      console.log(data);
+      
+      await UserModel.findOneAndUpdate(filter, data);
+
+      res.send(JSON.stringify('Saved'))
+    }catch (err) {
+      res.status(500).send(err.message);
+    }
+  })
+
+  // Change le nombre de fleurs de l'utilisateurs
+  //
+  app.put('/users/flowers', async (req, res) => {
+    try{
+      var data = req.body;
+      const filter = {
+        email: data.email,
+        password: data.password
+      }
+
+      await UserModel.findOneAndUpdate(filter, data);
+
+      const user = await UserModel.findOne(filter);
+
+      if(user){
+        connectedUser = user
+      }
+
+      res.send(JSON.stringify('Saved'))
+    }catch (err) {
+      res.status(500).send(err.message);
+    }
+  })
+
+  // Supprime un utilisateur
+  //
+  app.delete('/users/delete', async (req, res) => {
+    try{
+      var data = req.body;
+      const filter = {
+        email: data.email,
+        password: data.password
+      }
+
+      await UserModel.findOneAndRemove(filter);
+
+      res.send(JSON.stringify('Deleted'))
+    }catch (err) {
+      res.status(500).send(err.message);
+    }
   })
 
   // Démarrage de l'app Express

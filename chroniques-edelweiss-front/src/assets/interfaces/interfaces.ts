@@ -1,23 +1,23 @@
 export interface NewUser {
-    pseudo: String,
-    email: String,
-    password: String,
-    role: String,
-    flowers: Number
+    pseudo: string,
+    email: string,
+    password: string,
+    status: string,
+    flowers: number
 }
 
 export interface User {
-    id: Number,
-    pseudo: String,
-    email: String,
-    password: String,
-    role: String,
-    flowers: Number
+    id: number,
+    pseudo: string,
+    email: string,
+    password: string,
+    status: string,
+    flowers: number
 }
 
 export interface JDR {
-    id: Number,
-    name: String,
-    description: String,
+    id: number,
+    name: string,
+    description: string,
     date_prochaine_seance?: Date
 }
