@@ -45,14 +45,63 @@ async function init() {
   //
   // Commande JDR
   //==========================
+  // Récupère les jdrs
+  //
   app.get("/jdrs", async (req, res) => {
     try {
-        const docs = await JdrModel.find({});
-        res.json(docs);
+        const jdrs = await JdrModel.find({});
+        res.json(jdrs);
     } catch (err) {
         res.status(500).send(err.message);
     }
   });
+
+  // Création d'un nouveau utilisateur
+  //
+  app.post("/jdrs/create", async (req, res) => {
+    try {
+        var data = req.body;
+        console.log(data,'DATA', req.body, 'BODY')
+        const newJdr = new JdrModel({
+          name: data.name,
+          description: data.description,
+          date_prochaine_seance: undefined
+        })
+        newJdr.save();
+        res.status(201).send(JSON.stringify('Saved !'));
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+  });
+
+  // Change le jdr via la fenètre des administrateurs
+  //
+  app.put('/jdrs/modify', async (req, res) => {
+    try{
+      var data = req.body;
+      await JdrModel.findByIdAndUpdate(data._id, data)
+      res.send(JSON.stringify('Saved !'))
+    }catch (err) {
+      res.status(500).send(err.message);
+    }
+  })
+
+  // Supprime un JDR
+  //
+  app.delete('/jdrs/delete', async (req, res) => {
+    try{
+      var data = req.body;
+      const filter = {
+        name: data.name
+      }
+
+      await JdrModel.findOneAndRemove(filter);
+
+      res.send(JSON.stringify('Deleted'))
+    }catch (err) {
+      res.status(500).send(err.message);
+    }
+  })
 
   //
   // Commande users
@@ -83,7 +132,7 @@ async function init() {
             flowers: 0
         })
         newUser.save();
-        res.status(201).send("Saved!");
+        res.status(201).send(JSON.stringify('Saved !'));
     } catch (err) {
         res.status(500).send(err.message);
     }
@@ -158,31 +207,21 @@ async function init() {
       
       await UserModel.findOneAndUpdate(filter, data);
 
-      res.send(JSON.stringify('Saved'))
+      res.send(JSON.stringify('Saved !'))
     }catch (err) {
       res.status(500).send(err.message);
     }
   })
 
-  // Change le nombre de fleurs de l'utilisateurs
+  // Change l'utilisateur via la fenètre des administrateurs
   //
-  app.put('/users/flowers', async (req, res) => {
+  app.put('/users/modify', async (req, res) => {
     try{
       var data = req.body;
-      const filter = {
-        email: data.email,
-        password: data.password
-      }
 
-      await UserModel.findOneAndUpdate(filter, data);
+      await UserModel.findByIdAndUpdate(data._id, data);
 
-      const user = await UserModel.findOne(filter);
-
-      if(user){
-        connectedUser = user
-      }
-
-      res.send(JSON.stringify('Saved'))
+      res.send(JSON.stringify('Saved !'))
     }catch (err) {
       res.status(500).send(err.message);
     }

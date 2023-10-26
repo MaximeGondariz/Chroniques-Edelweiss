@@ -20,7 +20,7 @@ export class LogInComponent {
   constructor(private authService: AuthService){}
 
   logIn(form: NgForm){
-    this.authService.login(form.value.email, form.value.password).subscribe(value => {
+    this.authService.login(form.value.email.toLowerCase(), form.value.password).subscribe(value => {
       if(!value){
         this.isWrong = true;
       }else{

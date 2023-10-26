@@ -37,7 +37,7 @@ export class SignInComponent {
       if(input) input.classList.remove('error-input');
     }
 
-    if(!form.value.email || !this.emailRegExp.test(form.value.email)){
+    if(!form.value.email.toLowerCase() || !this.emailRegExp.test(form.value.email.toLowerCase())){
       const input = document.getElementById('email');
       if(input) input.classList.add('error-input');
       validation = false;
@@ -46,7 +46,7 @@ export class SignInComponent {
       if(input) input.classList.remove('error-input');
     }
 
-    if(form.value.email !== form.value.confirmEmail){
+    if(form.value.email.toLowerCase() !== form.value.confirmEmail.toLowerCase()){
       const input = document.getElementById('confirmEmail');
       if(input) input.classList.add('error-input');
       validation = false;
@@ -74,11 +74,11 @@ export class SignInComponent {
     }
 
     if(validation){
-      this.authService.checkSignIn(form.value.pseudo, form.value.email, form.value.password)
+      this.authService.checkSignIn(form.value.pseudo, form.value.email.toLowerCase(), form.value.password)
       .subscribe(value => {
         if(value === false){
-          this.authService.signIn(form.value.pseudo, form.value.email, form.value.password);
-          this.authService.login(form.value.email, form.value.password);
+          this.authService.signIn(form.value.pseudo, form.value.email.toLowerCase(), form.value.password);
+          this.authService.login(form.value.email.toLowerCase(), form.value.password).subscribe();
           this.router.navigate(['/'])
         }else{
           this.emailExist = true;

@@ -10,7 +10,7 @@
     </div>
 
     <div class="users-pag" *ngIf="chosenMenu === 1">
-        <table class="users-table">
+        <table>
             <thead>
                 <tr>
                     <td>
@@ -30,62 +30,18 @@
             <tbody>
                 <tr *ngFor="let user of Users; let index = index">
                     <td>
-                        {{user.pseudo}}
+                        <div class="name" (click)="goToUser(index)">
+                            {{user.pseudo}}
+                        </div>
                     </td>
                     <td>
                         {{user.email}}
                     </td>
                     <td>
-                        <div class="flowers">
-                            {{user.flowers}}
-                            <div class="flowers-icons">
-                                <div id="beforeAdd{{index}}" (click)="startAdd(index)">
-                                    +
-                                </div>
-                                <div id="afterAdd{{index}}" class="no-display">
-                                    <input id="inputAdd{{index}}" class="flowers-input" min="0" value="0" type="number">
-                                    <button (click)="stopAdd(index)">Ok?</button>
-                                </div>
-                                <div id="beforeSubstract{{index}}" (click)="startSubstract(index)">
-                                    -
-                                </div>
-                                <div id="afterSubstract{{index}}" class="no-display">
-                                    <input id="inputSubstract{{index}}" class="flowers-input" min="0" value="0" type="number">
-                                    <button (click)="stopSubstract(index)">Ok?</button>
-                                </div>
-                            </div>
-                        </div>
+                        {{user.flowers}}
                     </td>
-                    <td *ngIf="connectedUser.email !== user.email && connectedUser.password !== user.password">
-                        <select id="status{{index}}" (change)="changeStatus(index)">
-                            <option value="player" selected *ngIf="user.status === 'player'">Joueur</option>
-                            <option value="MJ" selected *ngIf="user.status === 'MJ'">Maitre du jeu</option>
-                            <option value="admin" selected *ngIf="user.status === 'admin'">Administrateur</option>
-
-                            <option value="player" *ngIf="user.status !== 'player'">Joueur</option>
-                            <option value="MJ" *ngIf="user.status !== 'MJ'">Maitre du jeu</option>
-                            <option value="admin" *ngIf="user.status !== 'admin'">Administrateur</option>
-                        </select>
-                    </td>
-                    <td *ngIf="connectedUser.email === user.email && connectedUser.password === user.password">
+                    <td>
                         {{user.status}}
-                    </td>
-                    <td id="beforeDelete{{index}}" class="suppr" (click)="startDelete(index)" *ngIf="connectedUser.email !== user.email && connectedUser.password !== user.password">
-                        Delete account?
-                    </td>
-                    <td id="afterDelete{{index}}" class="suppr no-display" *ngIf="connectedUser.email !== user.email && connectedUser.password !== user.password">
-                        Are you sure?
-                        <div class="yes-or-no">
-                            <div class="yes" (click)="deleteAccount(index)">
-                                Yes
-                            </div>
-                            <div class="no" (click)="stopDelete(index)">
-                                no
-                            </div>
-                        </div>
-                    </td>
-                    <td class="suppr" *ngIf="connectedUser.email === user.email && connectedUser.password === user.password">
-                        Vous ne pouvez pas supprimer votre compte içi
                     </td>
                 </tr>
             </tbody>
@@ -93,7 +49,7 @@
     </div>
 
     <div class="jdr-pag" *ngIf="chosenMenu === 2">
-        <table class="users-table">
+        <table>
             <thead>
                 <tr>
                     <td>
@@ -107,7 +63,9 @@
             <tbody>
                 <tr *ngFor="let jdr of JDRs; let index = index">
                     <td>
-                        {{jdr.name}}
+                        <div class="name" (click)="goToJdr(index)">
+                            {{jdr.name}}
+                        </div>
                     </td>
                     <td>
                         {{jdr.description}}
@@ -116,6 +74,7 @@
             </tbody>
         </table>
     </div>
+    <button class="create-button" (click)="goToCreateJdr()" *ngIf="chosenMenu === 2">Créer un nouveau JDR</button>
 </div>
 <div class="no-access" *ngIf="!connectedUser || connectedUser.status !== 'admin'">
     VOUS N'AVEZ PAS ACCEZ À CETTE PAGE

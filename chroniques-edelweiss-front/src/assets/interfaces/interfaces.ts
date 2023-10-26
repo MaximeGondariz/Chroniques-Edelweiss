@@ -7,7 +7,7 @@ export interface NewUser {
 }
 
 export interface User {
-    id: number,
+    _id: string,
     pseudo: string,
     email: string,
     password: string,
@@ -15,8 +15,14 @@ export interface User {
     flowers: number
 }
 
+
+export interface newJDR {
+    name: string,
+    description: string,
+    date_prochaine_seance?: Date
+}
 export interface JDR {
-    id: number,
+    _id: string,
     name: string,
     description: string,
     date_prochaine_seance?: Date

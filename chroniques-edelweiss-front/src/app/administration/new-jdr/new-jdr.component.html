@@ -1,0 +1,18 @@
+<div *ngIf="connectedUser && connectedUser.status === 'admin'">
+    <form 
+        class="card" 
+        (ngSubmit)="createJdr(formSearch)" 
+        #formSearch="ngForm"
+    >
+        <div class="card-body">
+            <input id="input-name" name="name" placeholder="Nom du JDR" ngModel >
+            <input id="input-descr" name="description" placeholder="Description du JDR" ngModel>
+            
+            <button type="submit">Confirmer la création?</button>
+        </div>
+    </form>
+</div>
+
+<div class="no-access" *ngIf="!connectedUser || connectedUser.status !== 'admin'">
+    VOUS N'AVEZ PAS ACCEZ À CETTE PAGE
+</div>

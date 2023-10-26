@@ -15,6 +15,9 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdministrationComponent } from './administration/administration.component';
+import { UserComponent } from './administration/user/user.component';
+import { JdrComponent } from './administration/jdr/jdr.component';
+import { NewJdrComponent } from './administration/new-jdr/new-jdr.component';
 
 const routes: Routes = [
   {
@@ -48,6 +51,18 @@ const routes: Routes = [
   {
     path: 'administration',
     component: AdministrationComponent
+  },
+  {
+    path: 'createJdr',
+    component: NewJdrComponent
+  },
+  {
+    path: 'modifyUser',
+    component: UserComponent
+  },
+  {
+    path: 'modifyJdr',
+    component: JdrComponent
   }
 ];
 @NgModule({
@@ -62,7 +77,10 @@ const routes: Routes = [
     ArchivesComponent,
     MainPageComponent,
     SideMenuComponent,
-    AdministrationComponent
+    AdministrationComponent,
+    UserComponent,
+    JdrComponent,
+    NewJdrComponent
   ],
   imports: [
     BrowserModule,

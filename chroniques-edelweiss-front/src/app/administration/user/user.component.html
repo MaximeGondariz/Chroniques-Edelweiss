@@ -1,0 +1,43 @@
+<div *ngIf="connectedUser && connectedUser.status === 'admin'">
+    <form 
+        class="card" 
+        *ngIf="chosenUser && connectedUser.email !== chosenUser.email && connectedUser.password !== chosenUser.password" 
+        (ngSubmit)="changeUser(formSearch)" 
+        #formSearch="ngForm"
+    >
+        <div class="card-title">
+            <div>
+                {{chosenUser.pseudo}}
+            </div>
+            <div class="card-subtitle">
+                {{chosenUser.email}}
+            </div>
+        </div>
+        <div class="card-body">
+            <input id="input-flowers" name="flowers" type="number" ngModel="{{chosenUser.flowers}}">
+            <select id="select-status" name="status" ngModel="{{chosenUser.status}}">
+                <option value="player" selected *ngIf="chosenUser.status === 'player'">Joueur</option>
+                <option value="MJ" selected *ngIf="chosenUser.status === 'MJ'">Maitre du jeu</option>
+                <option value="admin" selected *ngIf="chosenUser.status === 'admin'">Administrateur</option>
+
+                <option value="player" *ngIf="chosenUser.status !== 'player'">Joueur</option>
+                <option value="MJ" *ngIf="chosenUser.status !== 'MJ'">Maitre du jeu</option>
+                <option value="admin" *ngIf="chosenUser.status !== 'admin'">Administrateur</option>
+            </select>
+            
+            <button class="change" type="submit">Confirmer les changements?</button>
+        </div>
+    </form>
+    <button class="delete" type="button" (click)="deleteUser()">Supprimer le compte?</button>
+
+    <div class="no-access" *ngIf="!chosenUser">
+        CETTE UTILISATEUR N'ÉXISTE PAS
+    </div>
+    <div class="no-access" *ngIf="chosenUser && connectedUser.email === chosenUser.email && connectedUser.password === chosenUser.password">
+        VOUS NE POUVEZ PAS MODIFIER VOS INFORMATIONS DEPUIS CETTE PAGE
+    </div>
+</div>
+
+<div class="no-access" *ngIf="!connectedUser || connectedUser.status !== 'admin'">
+    VOUS N'AVEZ PAS ACCEZ À CETTE PAGE
+</div>

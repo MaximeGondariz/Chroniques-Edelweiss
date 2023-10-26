@@ -1,0 +1,32 @@
+<div *ngIf="connectedUser && connectedUser.status === 'admin'">
+    <form 
+        class="card" 
+        *ngIf="chosenJdr" 
+        (ngSubmit)="changeJdr(formSearch)" 
+        #formSearch="ngForm"
+    >
+        <div class="card-title">
+            <div>
+                {{chosenJdr.name}}
+            </div>
+            <div class="card-subtitle">
+                {{chosenJdr.description}}
+            </div>
+        </div>
+        <div class="card-body">
+            <input id="input-name" name="name" ngModel="{{chosenJdr.name}}">
+            <input id="input-descr" name="description" ngModel="{{chosenJdr.description}}">
+
+            <button class="change" type="submit">Confirmer les changements?</button>
+        </div>
+    </form>
+    <button *ngIf="chosenJdr"  class="delete" type="button" (click)="deleteJdr()">Supprimer le JDR?</button>
+
+    <div class="no-access" *ngIf="!chosenJdr">
+        CE JDR N'ÉXISTE PAS
+    </div>
+</div>
+
+<div class="no-access" *ngIf="!connectedUser || connectedUser.status !== 'admin'">
+    VOUS N'AVEZ PAS ACCEZ À CETTE PAGE
+</div>

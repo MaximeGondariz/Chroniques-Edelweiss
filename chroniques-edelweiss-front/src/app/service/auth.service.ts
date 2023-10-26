@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NewUser, User } from 'src/assets/interfaces/interfaces';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,10 @@ export class AuthService implements OnInit {
 
   connectedUser: User | undefined;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.checkAuth()
@@ -22,6 +26,7 @@ export class AuthService implements OnInit {
       .unsubscribe();
   }
 
+  //Récupère les utilisateurs
   getUsers(){
     return this.httpClient.get<User[]>(this.urlApi);
   }
@@ -53,6 +58,7 @@ export class AuthService implements OnInit {
     );
   }
 
+  //Inscription de l'utilisateur
   signIn(pseudo: string, email: string, password: string) {
     const newUser: NewUser = {
       pseudo: pseudo,
@@ -72,22 +78,17 @@ export class AuthService implements OnInit {
     return this.httpClient.get<User>(this.urlApi + '/checklogin');
   }
 
-  changeStatus(user: User, status: string){
-    user.status = status;
-
-    this.httpClient.put(this.urlApi + '/status', user).subscribe(() => window.location.reload());
+  //Modifie l'utilisateur
+  changeUser(user: User){
+    this.httpClient.put(this.urlApi+ '/modify', user).subscribe(() => this.router.navigate(['/administration']) );
   }
 
-  changeFlowers(user: User, flowers: number){
-    user.flowers += flowers;
-
-    this.httpClient.put(this.urlApi + '/flowers', user).subscribe(() => window.location.reload());
-  }
-
+  //Supprime l'utilisateur
   deleteAccount(user: User){
-    this.httpClient.delete(this.urlApi + '/delete', {body: user}).subscribe(() => window.location.reload());
+    this.httpClient.delete(this.urlApi + '/delete', {body: user}).subscribe(() => this.router.navigate(['/administration']));
   }
 
+  //Déconnecte l'utilisateur
   logout() {
     this.httpClient.get<boolean>(this.urlApi + '/logout').subscribe(() => window.location.reload());
   }
