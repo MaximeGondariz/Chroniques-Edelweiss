@@ -55,7 +55,7 @@ mj "1" --  "0..*" jdr
 mj "1" -- "0..*" notification
 admin "1" -- "0..*" notification
 
-mj "1..*" -- "0..*" record
-admin "1..*" -- "0..*" record
+mj "1..*" -- "0..*" records
+admin "1..*" -- "0..*" records
 
 @enduml
