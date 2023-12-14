@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors"
+import crypto from "crypto";
 
 mongoose.set('strictQuery', true);
 
@@ -137,7 +138,7 @@ async function init() {
             id: Users.length,
             pseudo: data.pseudo,
             email: data.email,
-            password: data.password,
+            password: crypto.createHash('sha256').update(data.password).digest('hex'),
             status: data.status,
             flowers: 0
         })
@@ -168,14 +169,16 @@ async function init() {
   app.post('/users/login', async (req, res) => {
     try{
       var data = req.body;
+      
       const filter = {
-        email: data.email,
-        password: data.password
+        email: data.email
       }
+      console.log(filter);
       const user = await UserModel.findOne(filter);
       let connection = false;
-
-      if(user){
+      console.log(user)
+      
+      if(user && user.password === crypto.createHash('sha256').update(data.password).digest('hex')){
         connection = true
         connectedUser = user
       }

@@ -28,7 +28,7 @@
             <button class="change" type="submit">Confirmer les changements?</button>
         </div>
     </form>
-    <button class="delete" type="button" (click)="deleteUser()">Supprimer le compte?</button>
+    <button class="delete" type="button" (click)="deleteUser()" *ngIf="chosenUser && connectedUser.email !== chosenUser.email && connectedUser.password !== chosenUser.password">Supprimer le compte?</button>
 
     <div class="no-access" *ngIf="!chosenUser">
         CETTE UTILISATEUR N'ÉXISTE PAS

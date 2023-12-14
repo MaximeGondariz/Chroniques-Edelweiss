@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NewUser, User } from 'src/assets/interfaces/interfaces';
 import { Router } from '@angular/router';
@@ -6,25 +6,17 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService implements OnInit {
+export class AuthService{
   urlApi: string = 'http://localhost:8000/users';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  connectedUser: User | undefined;
-
   constructor(
     private httpClient: HttpClient,
     private router: Router
   ) {}
-
-  ngOnInit(): void {
-    this.checkAuth()
-      .subscribe((value) => (this.connectedUser = value))
-      .unsubscribe();
-  }
 
   //Récupère les utilisateurs
   getUsers(){

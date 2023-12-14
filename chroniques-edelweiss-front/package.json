@@ -23,6 +23,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.4.2",
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "crypto-hash": "^3.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "yarn": "^1.22.19",
