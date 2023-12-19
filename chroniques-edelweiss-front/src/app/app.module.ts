@@ -12,7 +12,6 @@ import { LogInComponent } from './log-in/log-in.component';
 import { LegalTermsComponent } from './legal-terms/legal-terms.component';
 import { ArchivesComponent } from './archives/archives.component';
 import { MainPageComponent } from './main-page/main-page.component';
-import { SideMenuComponent } from './side-menu/side-menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdministrationComponent } from './administration/administration.component';
 import { UserComponent } from './administration/user/user.component';
@@ -76,7 +75,6 @@ const routes: Routes = [
     LegalTermsComponent,
     ArchivesComponent,
     MainPageComponent,
-    SideMenuComponent,
     AdministrationComponent,
     UserComponent,
     JdrComponent,

@@ -6,21 +6,17 @@
         </div>
     </div>
 
-    <ng-container *ngIf="recordShown !== undefined">
-        <div class="record-container">
-            <div class="record-card" *ngFor="let record of recordTable[recordShown].record">
-                <div class="record-card-title">
-                    {{record.title}}
-                </div>
-                <div class="record-card-winners">
-                    <p *ngFor="let player of record.players">{{player}}</p>
-                </div>
-                <div class="record-card-highscore">
-                    <p>{{record.highscore}}</p>
-                </div>
-            </div>
-        </div>
-    </ng-container>
+    <div class="record-container" *ngIf="recordShown !== undefined">
+        <article class="record-card" *ngFor="let record of recordTable[recordShown].record">
+            <header class="record-card-title">
+                <h3>{{record.title}}</h3>
+            </header>
+            <ng-container>
+                <p class="record-card-winners" *ngFor="let player of record.players">{{player}}</p>
+            </ng-container>
+                <p class="record-card-highscore">{{record.highscore}}</p>
+        </article>
+    </div>
 
     <ng-container *ngIf="recordShown === undefined">
         <div class="record-not-found">

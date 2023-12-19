@@ -1,20 +1,22 @@
 <div class="main-container">
     <ng-container *ngFor="let jdr of jdrTable; let index = index">
-        <div class="jdr-container">
-            <img class="jdr-img" src="../../assets/img/logo_principale_edelweiss.png">
+        <article class="jdr-container">
+            <figure>
+                <img alt="Illustration du jdr" class="jdr-img" src="../../assets/img/logo_principale_edelweiss.png">
+            </figure>   
 
             <div class="jdr-info">
-                <div class="jdr-title">
-                    {{jdr.name}}
-                </div>
-                <div class="jdr-description">
+                <header class="jdr-title">
+                    <h3>{{jdr.name}}</h3>
+                </header>
+                <p class="jdr-description">
                     {{jdr.description}}
-                </div>
+                </p>
                 <!--<div class="jdr-buttons">
                     <button>PLANNING</button>
                      <button>CANDIDATURE</button> 
                 </div>-->
             </div>
-        </div>
+        </article>
     </ng-container>
 </div>
