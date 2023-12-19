@@ -12,7 +12,14 @@ a{
     color: var(--white);
     cursor: pointer;
     margin: 10px;
-    font-size: 20px
+    font-size: 20px;
+    transition: 0.25s;
+}
+
+a:hover{
+    color: var(--yellow);
+    transition: 0.25s;
+    font-size: 24px;
 }
 
 footer{
@@ -65,13 +72,6 @@ nav{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-}
-
-.links-menu>a{
-    text-decoration: none;
-    color: var(--white);
-    cursor: pointer;
-    margin: 10px;
 }
 
 .nav-img{

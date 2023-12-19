@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent {
 
+  pseudoRegExp = new RegExp("(?=.*[<>=])");
+
   emailRegExp = new RegExp("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$");
 
   passwordRegExp = new RegExp("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[!@#$%\\^&*)(+=._-]).{8,}");
@@ -28,7 +30,7 @@ export class SignInComponent {
 
   signIn(form: NgForm){
     let validation = true;
-    if(!form.value.pseudo){
+    if(!form.value.pseudo || this.pseudoRegExp.test(form.value.pseudo)){
       const input = document.getElementById('pseudo');
       if(input) input.classList.add('error-input');
       validation = false;
